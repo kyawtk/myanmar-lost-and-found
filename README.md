@@ -18,9 +18,9 @@
 
 
 
-## [DEMO]([https://ai-media-nextjs.vercel.app/](https://myanmar-lost-and-found.vercel.app))
+## [DEMO]([https://ai-media-nextjs.vercel.app/](https://myanmar-lost-and-found.vercel.app)
 
 
-<img src="/public/ss.png" alt="Alt text" title=" title">
+<img src="./public/ss.png" alt="Alt text" title=" title">
 
 
