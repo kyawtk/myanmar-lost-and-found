@@ -12,7 +12,7 @@ const LostItems = () => {
   let [sortBy, setSortBy] = useState("");
   let [category, setCategory] = useState("");
   let [loading, setLoading] = useState(true);
-  let [lostItems, setLostItems] = useState([]);
+  let [lostItems, setLostItems] = useState(null);
   let [searchTerm, setSearchTerm] = useState("");
   const fetchLostItems = (query) => {
     setLoading(true);
@@ -61,7 +61,7 @@ const LostItems = () => {
     }
     fetchLostItems(query);
   }, [sortBy, region,category]);
-
+console.log(lostItems)
   return (
     <section className="flex flex-col min-h-screen bg-primary  gap-4 p-4 innerWidth">
       <SearchBar
@@ -74,7 +74,7 @@ const LostItems = () => {
         category={category}
         setCategory={setCategory}
       ></SearchBar>
-      {lostItems.length == 0 && (
+      {lostItems?.length == 0 && (
         <div className="w-full h-full flex justify-center items-center font-bold">
           <p>No items found</p>
         </div>

@@ -6,7 +6,8 @@ export const lostItemsQuery = `*[ _type == 'lostItem']{
     title,
     image,
     location,
-    date
+    date,
+    _type
 }`;
 export const foundItemsQuery = `*[ _type == 'foundItem']{ 
     _id,

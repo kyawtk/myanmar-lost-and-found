@@ -1,10 +1,13 @@
+'use client'
 import { urlFor } from "@/app/client";
 import Link from "next/link";
 import React from "react";
 import moment from "moment";
 const ItemCard = ({ item }) => {
-  const { image, title, description, category, location, date, _id, _type } =
+  const { image, title, description, category, location, date, _id,  } =
     item
+    console.log(item)
+  
   return (
     <div className=" cursor-pointer p-5 flex-1 bg-[rgba(255,255,255,0.45)] backdrop-blur-[20px] md:min-w-[400px] md:max-w-[500px] rounded-lg  shadow-lg hover:scale-105 transition-all">
       <div className="flex flex-col md:flex-row items-start gap-5 h-full">
@@ -18,7 +21,9 @@ const ItemCard = ({ item }) => {
         <div className="w-full flex flex-col justify-between   h-full  gap-3">
           <div className="h-full flex flex-col justify-between">
             <div className="">
-              <h2 className="text-2xl font-bold ">{_type == 'foundItem'? "Found":"Lost"}: {title}</h2>
+              <h2 className="text-2xl font-bold ">
+               {item?._type =="lostItem"? "Lost":"Found"}: {title}
+              </h2>
               <p className="text-gray-700  break-all">
                 <span className="font-semibold">Description:</span>{" "}
                 {description.slice(0, 100)}
@@ -27,7 +32,7 @@ const ItemCard = ({ item }) => {
             </div>
             <div className="rounded-sm p-2 font-semibold bg-white">
               <p className="">Location: {location.region}</p>
-              {_type == "foundItem" ? null : (
+              {item?._type =="foundItem" ? null : (
                 <span className="font-bold text-lg text-red-500 ">
                   Missing for {moment(date)?.fromNow().slice(0, -4)}
                 </span>
@@ -38,8 +43,10 @@ const ItemCard = ({ item }) => {
           </div>
 
           <Link
-            href={`/${_type== "lostItem"?"lost":"found"}-items/${_id}`}
-            className={`p-3 my-auto inline-block flex-1 bg-${_type=='lostItem'?'red':'green'}-500 hover:bg-blue-700 rounded-sm font-semibold text-white `}
+            href={`/${item?._type=="lostItem"? "lost":'found'}-items/${_id}`}
+            className={`p-3 my-auto inline-block flex-1 bg-${
+              item?._type == "lostItem" ? "red" : "green"
+            }-500 hover:bg-blue-700 rounded-sm font-semibold text-white `}
           >
             View Details 📰
           </Link>
