@@ -1,11 +1,20 @@
+'use client'
+import { fadeIn, staggerContainer } from "@/utils/variants";
+import { motion, stagger } from "framer-motion";
 import Link from "next/link";
 import React from "react";
 import { MdContactPhone, MdHandshake, MdNewspaper, MdVerifiedUser } from "react-icons/md";
 
 const How = () => {
   return (
-    <section className="innerWidth flex flex-col justify-center pt-10 items-center gap-10 ">
-      <h1 className="text-[#3a3737]   tracking-wide text-2xl lg:text-4xl font-bold uppercase">How we help you</h1>
+    <motion.section
+    variants={staggerContainer(0,0)}
+    initial='hidden'
+    whileInView={'show'}
+    className="innerWidth flex flex-col justify-center pt-10 items-center gap-10 ">
+      <motion.h1
+      variants={fadeIn('down','tween',0.2,0.3)}
+      className="text-[#3a3737]   tracking-wide text-2xl lg:text-4xl font-bold uppercase">How we help you</motion.h1>
       <small>How the process works</small>
       <div className="flex lg:max-w-[80%]  flex-col lg:flex-row justify-center items-center gap-10 text-center">
         <div className="flex flex-col gap-8 max-w-[400px] ">
@@ -63,7 +72,7 @@ const How = () => {
           </Link>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

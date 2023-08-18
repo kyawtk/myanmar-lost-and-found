@@ -25,7 +25,7 @@ const Navbar = () => {
         <Link href="/post-item">Post Item</Link>
         <Link href="/lost-items"> Lost Items</Link>
         <Link href="/found-items"> Found Items</Link>
-        <Link href="/about"> About</Link>
+      
       </div>
       {navOpen && (
         <div

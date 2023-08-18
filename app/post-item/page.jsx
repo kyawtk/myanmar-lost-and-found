@@ -3,7 +3,7 @@ import { Switch } from "@headlessui/react";
 import { lostItemCategories, regions } from "@/utils/data";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
-
+import { FaHandPointLeft} from 'react-icons/fa'
 import { useFormik } from "formik";
 import Spinner from "@/components/Spinner";
 import { useState } from "react";
@@ -78,7 +78,7 @@ const PostItemPage = () => {
           "Item posted successfully\n" + `Here is your post id : ${res._id}`
         );
         setPosting(false);
-        router.push("/");
+        router.push(`/${foundOrLost}-items`);
       });
     },
   });
@@ -91,13 +91,19 @@ const PostItemPage = () => {
   return (
     <div className="innerWidth flex bg-primary bg-center bg-no-repeat bg-cover bg-fixed   flex-col ">
       <BackButton></BackButton>
-      <div className={`shadow-lg m-auto flex lg:flex-row flex-col items-center bg-[rgba(255,255,255,0.45)] backdrop-blur-[20px] lg:p-5 p-3 w-full md:max-w-[700px] my-10 rounded-md border border-${foundOrLost=="found"?'green':'red'}-500`}>
+      <div
+        className={`shadow-lg m-auto flex lg:flex-row flex-col items-center bg-[rgba(255,255,255,0.45)] backdrop-blur-[20px] lg:p-5 p-3 w-full md:max-w-[700px] my-10 rounded-md border border-${
+          foundOrLost == "found" ? "green" : "red"
+        }-500`}
+      >
         <div className=" p-3 felx flex-0.7 w-full">
-          <Switch
+          <div className="flex items-center gap-3 text-white text-2xl"> <Switch
             checked={enabled}
-            onChange={()=>{
-              setEnabled(!enabled)
-              setFoundOrLost(current => current == "found" ? "lost" : "found")
+            onChange={() => {
+              setEnabled(!enabled);
+              setFoundOrLost((current) =>
+                current == "found" ? "lost" : "found"
+              );
             }}
             className={`${
               enabled ? "bg-red-600" : "bg-green-500"
@@ -109,7 +115,8 @@ const PostItemPage = () => {
                 enabled ? "translate-x-6" : "translate-x-1"
               } inline-block h-4 w-4 transform rounded-full bg-white transition`}
             />
-          </Switch>
+          </Switch> <FaHandPointLeft></FaHandPointLeft></div>
+         
           <h1 className="text-2xl md:text-3xl mb-7 font-bold text-gray-700 underline text-center">
             {foundOrLost == "found" ? "Found" : "Lost"} Item Form
           </h1>
@@ -284,11 +291,15 @@ const PostItemPage = () => {
               onMouseEnter={() => setButtonHovered(true)}
               onMouseLeave={() => setButtonHovered(false)}
               type="submit"
-              className=" relative bg-red-500 font-bold py-4 text-white hover:scale-105 hover:text-red-950 "
+              className={`relative bg--500 font-bold py-4 text-white hover:scale-105 `}
             >
               Submit
               {buttonHovered && (
-                <div className="absolute z-50 -top-[150px] left-0 text-white  bg-red-500 opacity-90 p-5 font-semibold">
+                <div
+                  className={`absolute z-50 -top-[150px] left-0 text-white  bg-${
+                    enabled ? "red" : "green"
+                  }-500 opacity-90 p-5 font-semibold`}
+                >
                   <p>
                     After submitting your{" "}
                     {foundOrLost == "found" ? "found" : "lost"} item, you will
