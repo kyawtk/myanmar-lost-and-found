@@ -4,6 +4,7 @@ import { client, urlFor } from "@/app/client";
 import Spinner from "@/components/Spinner";
 import { lostItemQuery } from "@/utils/data";
 import moment from "moment";
+
 import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
@@ -11,8 +12,10 @@ import {
   MdArrowCircleLeft,
   MdArrowDownward,
   MdArrowLeft,
+  MdDelete,
 } from "react-icons/md";
 import MoreMissing from "@/components/MoreMissing";
+import Deletebox from "@/components/DeleteModal";
 
 // const fetchItem = (id) => {
 //   const query = lostItemQuery(params.id);
@@ -23,6 +26,8 @@ import MoreMissing from "@/components/MoreMissing";
 // };
 const ItemPage = ({ params }) => {
   const router = useRouter();
+  let [isOpen, setIsOpen] = useState(false)
+
   const [item, setItem] = useState(null);
   useEffect(() => {
     const query = lostItemQuery(params.id);
@@ -42,7 +47,7 @@ const ItemPage = ({ params }) => {
     <div className="innerWidth min-h-screen bg-primary ">
       {" "}
       <div
-        className="text-3xl md:text-4xl text-blue-500 hover:bg-blue-100 w-fit ml-5 pt-5  rounded-full p-2 "
+        className="text-3xl md:text-4xl text-white hover:bg-blue-100 w-fit ml-5 pt-5  rounded-full p-2 "
         onClick={() => router.back()}
       >
         <MdArrowCircleLeft></MdArrowCircleLeft>
@@ -91,9 +96,14 @@ const ItemPage = ({ params }) => {
             <div className="p-2 my-3 text-center  bg-gray-200 font-bold text-lg">
               <p className="underline decoration-red-500 decoration-2 ">Telephone☎️: {item?.contact?.tel}</p>
               <p className="underline decoration-red-500 decoration-2">Email📧: {item?.contact?.email}</p>
+              <button onClick={()=>setIsOpen(true)} className="flex bg-red-500 items-center  p-2">
+                <MdDelete></MdDelete>Delete this post
+              </button>
+              <Deletebox id={item?._id} isOpen={isOpen} setIsOpen={setIsOpen}></Deletebox>
             </div>
           </div>
         </div>
+
       </section>
       <MoreMissing category={item?.category}></MoreMissing>
     </div>
